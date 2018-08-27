@@ -5,7 +5,8 @@ var dotEnv  = require('dotenv').config();
 var keys    = require('./key.js');
 var moment  = require('moment');
 var fs      = require('fs');
-var inquirer = require ('inquirer');
+var inquirer= require ('inquirer');
+
 
 // setting a variable for action
 var action;
@@ -16,6 +17,8 @@ var acceptable = ["concert-this", "spotify-this-song", "movie-this","do-what-it-
 // creating a new instance of spotify object 
 var spotify = new Spotify (keys.spotify);
 
+var newLog = "";
+
 // collecting inputs from user
 getInput();
 console.log("searchName  is     " , searchName);
@@ -25,7 +28,13 @@ toDo();
 
 // Function to grab the inputs from console, exclude the first 2 elements, update the global variable "action" to the value of third elements, and concatenates the rest to an api search format
 function getInput (){
+    
     var data =  process.argv;
+    for(var i = 2 ; i < data.length ; i++) {
+        newLog = newLog + " " + data[i];
+    } 
+    updateLog(newLog);
+
     // if user dosn't enter the action and the thing to search
     if (data.length === 2 ){
         askForAction();
@@ -101,26 +110,6 @@ function askForAction (){
         }    
     });
 }
-
-// function askForBoth (){
-//     inquirer.prompt([
-//         {
-//             type: "list",
-//             message: "you need to tell us what you want to do, Do you want a list of options?",
-//             choices: ["concert-this", "spotify-this-song", "movie-this","do-what-it-says"],
-//             name: "option"
-//         },
-//         {
-//             type: "input",
-//             message: "What you wanna search?",
-//             name: "search"
-//         }
-//     ]).then(function(inquirerResponse) {
-//         action = inquirerResponse.option;
-//         searchName = inquirerResponse.search;
-//         toDo();
-//     });
-// }
 
 function askForSrchItem (){
     inquirer.prompt([
@@ -252,7 +241,18 @@ function doRandom(){
         }
       });
 }
-    
+
+function updateLog(str) {
+
+    // We will add the value to the log file.
+    fs.appendFile("log.txt", "\n " + str, function(err) {
+      if (err) {
+        return console.log(err);
+      }
+    });
+}
+  
+   
 function display (header, content){
     console.log("=======================================");
     console.log("  "+header+"              ");
