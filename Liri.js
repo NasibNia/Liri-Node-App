@@ -18,6 +18,7 @@ var spotify = new Spotify (keys.spotify);
 
 // collecting inputs from user
 getInput();
+console.log("searchName  is     " , searchName);
 // running action item accordingly
 toDo();
 
@@ -27,12 +28,27 @@ function getInput (){
     var data =  process.argv;
     // if user dosn't enter the action and the thing to search
     if (data.length === 2 ){
-        askForBoth();
+        askForAction();
     } 
-    else if (data.length === 3 && (action !== "do-what-it-says")){
+    else if (data.length === 3){
         action = data[2];
-        //ask user to enter a search item
-        askForSrchItem();
+        if (validate (action)){
+            console.log("you didn't enter a search item for the action, default would be used if applicable");
+
+            if (action === "spotify-this-song"){
+                searchName = "The+Sign";
+            }
+            if (action === "movie-this"){
+                searchName = "Mr.+Nobody";
+            }
+            // if (action !== "do-what-it-says"){
+            //     //ask user to enter a search item
+            //     askForSrchItem();
+            // }   
+        } else {
+            console.log ("seems that the action you asked is not among our list of acceptable actions");
+            askForAction();
+        }    
     } else {
         action = data[2];
         searchName = data[3];
@@ -50,9 +66,6 @@ function toDo () {
             findEvent();
             break;
         case "spotify-this-song" :
-            // if(searchName== undefined){
-            //     console.log("yay")
-            // }
             callSpotify();
             break;
         case "movie-this" :
@@ -71,7 +84,7 @@ function validate (str){
     return false;
 }
 
-function askForBoth (){
+function askForAction (){
     inquirer.prompt([
         {
             type: "list",
@@ -79,17 +92,35 @@ function askForBoth (){
             choices: ["concert-this", "spotify-this-song", "movie-this","do-what-it-says"],
             name: "option"
         },
-        {
-            type: "input",
-            message: "What you wanna search?",
-            name: "search"
-        }
     ]).then(function(inquirerResponse) {
         action = inquirerResponse.option;
-        searchName = inquirerResponse.search;
-        toDo();
+        if(action === "do-what-it-says" ){
+            toDo();
+        } else {
+            askForSrchItem();
+        }    
     });
 }
+
+// function askForBoth (){
+//     inquirer.prompt([
+//         {
+//             type: "list",
+//             message: "you need to tell us what you want to do, Do you want a list of options?",
+//             choices: ["concert-this", "spotify-this-song", "movie-this","do-what-it-says"],
+//             name: "option"
+//         },
+//         {
+//             type: "input",
+//             message: "What you wanna search?",
+//             name: "search"
+//         }
+//     ]).then(function(inquirerResponse) {
+//         action = inquirerResponse.option;
+//         searchName = inquirerResponse.search;
+//         toDo();
+//     });
+// }
 
 function askForSrchItem (){
     inquirer.prompt([
@@ -104,7 +135,14 @@ function askForSrchItem (){
     });
 }
 
-
+// spotify
+//   .request('https://api.spotify.com/v1/tracks/3oCJJksC12uFxkt3RQ7rbV')
+//   .then(function(data) {
+//     console.log("check the sign" ,data); 
+//   })
+//   .catch(function(err) {
+//     console.error('Error occurred: ' + err); 
+//   });
 
 function callSpotify(){
 
@@ -112,42 +150,30 @@ function callSpotify(){
         if (err) {
             return console.log('Error occurred: ' + err);
         }
-        // console.log("data.tracks           is             \n", data.tracks.items[0]); 
+
+        console.log ("data     " , data.tracks.items[0]);
+
+        // for (var j = 0 ; j < 20; j++){
         var artists = data.tracks.items[0].album.artists;
         displayHd("Artist(s) name");
-
-        // console.log("=======================================");
-        // console.log("            Artist(s) name ");
-        // console.log("           ~~~~~~~~~~~~~~~~~~~         ");
         for (var i = 0 ; i < artists.length ; i++){
             displayCnt(artists[i].name);
-            // console.log( artists[i].name);
         }
-        displayHd("Name Of the Songs");
 
-        // console.log("=======================================");
-        // console.log("             Name Of the Song");
-        // console.log("           ~~~~~~~~~~~~~~~~~~~         ");
-        for (var i = 0 ; i < artists.length ; i++){
-            displayCnt(data.tracks.items[0].name);
-            // console.log( data.tracks.items[0].name);
-        }
+        displayHd("Name Of the Songs");
+        displayCnt(data.tracks.items[0].name);
+
+        
         displayHd("External Url");
-        // console.log("=======================================");
-        // console.log("             External Url");
-        // console.log("           ~~~~~~~~~~~~~~~~~~~         ");
-        for (var i = 0 ; i < artists.length ; i++){
-            displayCnt(data.tracks.items[0].external_urls.spotify)
-            // console.log( data.tracks.items[0].external_urls.spotify);
-        }
+        displayCnt(data.tracks.items[0].external_urls.spotify);
+
+        displayHd("Preview Link");
+        displayCnt(data.tracks.items[0].preview_url);
+
+
         displayHd("Album Name");
-        // console.log("=======================================");
-        // console.log("             Album Name");
-        // console.log("           ~~~~~~~~~~~~~~~~~~~         ");
-        for (var i = 0 ; i < artists.length ; i++){
-            // console.log( data.tracks.items[0].album.name);
-            displayCnt("data.tracks.items[0].album.name");
-        }
+        displayCnt(data.tracks.items[0].album.name);
+    // }
     });
 }
 function findEvent() {
