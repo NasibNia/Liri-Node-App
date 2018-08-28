@@ -70,7 +70,7 @@ This program is not deployed and is run on the console.
 This block of the code shows the process of collecting inputs from the user and providing appropriate logic channels based on the validation analysis of those input as the following:
 
 1) If neither action nor the search item is provided by the user, Liri will provide the list of actions to the user and also asks to enter a search item later on.
-2) If the action is provided, Liri checks to see if it is among the acceptable ones; if so and if the asked request is other than "do-what-it-says" Liri asks user to enter a search item and then calls for the search
+2) If the action is provided, Liri checks to see if it is among the acceptable ones; if so and if the asked request is  "concert this" Liri asks user to enter a search item. If action is either "spotify-this-song" or "movie-this" it will provide a default for the searchName. Then, it calls for the appropriate searching action.
 3)If both action and search item are provided and action is in the acceptable list, then Liri calls for the appropriate channel of search.
 
 ```
