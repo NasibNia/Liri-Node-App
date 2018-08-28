@@ -30,7 +30,7 @@ Finally it will get back to the user by providing the results search the console
 <!-- make a link to the deployed site --> 
 <!-- [What the user will see](the link to the deployed site) -->
 
-[Liri Node Application]
+
 This program is not deployed and is run on the console.
 
 
@@ -53,7 +53,6 @@ This program is not deployed and is run on the console.
 ⋅⋅1. Ordered sub-list
 4. And another item. 
 -->
-- jquery
 - javascript
 - node.js
 - API calls
@@ -118,7 +117,6 @@ function getInput (){
 
 # Learning points
 <!-- Learning points where you would write what you thought was helpful -->
-- jquery
 - javascript
 - node.js
 - API calls
