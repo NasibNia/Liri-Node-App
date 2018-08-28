@@ -25,6 +25,12 @@ There are defaults provided for "spotify-this-song" and "movie-this" in case tha
 
 Finally it will get back to the user by providing the results search the console.
 
+Also, in this project I used "inquirer" to interact with user through promp method. This package is used to provide user a list of acceptable actions in cases that no right input is provided.
+
+I also used fs package (file system) to read text file (random.txt when the action "do-what-it-says" is asked by user).
+I also created a text file named log.txt that will be updated through fs.append method. This text file will keep a record of any command that is typed to the console.log.
+
+Other packages that are used in this project include "moment.js" to print out the concert date to a specific format, "request" to grab data from the OMDB API and the Bands In Town API , "dotEnv" to load environment variables from a .env file into process.env, and " Node Spotify API " which is a simple to use API library for the Spotify REST API. 
 
 # Link to deployed site
 <!-- make a link to the deployed site --> 
@@ -59,6 +65,7 @@ This program is not deployed and is run on the console.
 - promise functions
 - call backs
 - error handling
+- moment.js
 
 
 
