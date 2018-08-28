@@ -7,18 +7,21 @@
 This fun project is my official introuduction to the beautiful world of node.js, the powerful package that enables us to run javascript outside of browsers. The application has capability of searching songs through spotify API, movies through OMDB API, and concerts through Bandsintown API. There are couple of modules that are required for the app to function properly. All of these dependecies are listed at the begining of the code using the keyword 'require' and  would need to be installed if are not provided under the name "node_modules"
 
 To ask Liri for a specific task, user would need to provide the right command in the terminal. 
+
 For instance, proper command for searching a song named "nothing else matters" would be:
-node spotify-this-song nothing else matters
+"node Liri.js spotify-this-song nothing else matters"
 
 proper command for searching a movie named "mean girls" would be:
-node movie-this mean girls
+"node Liri.js movie-this mean girls"
 
 proper command for searching a concert from "katy perry" would be:
-node concert-this katy perry
+"node Liri.js concert-this katy perry"
 
-Also, there is a command as shown bellow, that goes through a file 
+Also, there is another command as "node Liri.js do-as-it-says " that goes through the text file "random.txt" and takes its content as "action" and "search item".
 
 Liri would take the search name and will send the search name to the appropriate searchh channel, depending on the requested action. If the provided name includes more than one word, the code concatenates them into a api-searchable  format.
+
+There are defaults provided for "spotify-this-song" and "movie-this" in case that only the action is provided and not the search name.
 
 Finally it will get back to the user by providing the results search the console.
 
