@@ -34,7 +34,7 @@ This program is not deployed and is run on the console.
 # Images
 <!-- take a picture of the image and add it into the readme  -->
 <!-- ![image title](path or link to image) -->
-![wire frame](https://www.pexels.com/photo/white-laptop-computer-on-white-desk-1329068/)
+![bot](bot.jpg)
 
 
 
