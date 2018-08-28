@@ -66,6 +66,13 @@ This program is not deployed and is run on the console.
 - call backs
 - error handling
 - moment.js
+- node dotEnv
+- node request
+- Node Spotify API
+- fs (file system)
+- inquirer (.prompt)
+- npm
+- node modulus
 
 
 
@@ -130,6 +137,15 @@ function getInput (){
 - promise functions
 - call backs
 - error handling
+- moment.js
+- node dotEnv
+- node request
+- Node Spotify API
+- working with fs (file system)
+- working with inquirer (.prompt)
+- npm init -y
+- npm install
+- node modulus
 
 
 
